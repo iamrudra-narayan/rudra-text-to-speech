@@ -1,12 +1,17 @@
 import json
+from dotenv import load_dotenv
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
 import requests
+import os
+
+load_dotenv()  # Loads from .env file
 
 app = FastAPI(title="FreeTTS Voice Generator API", version="1.0")
 
+AUTH_KEY = os.getenv("AUTHORIZATION_KEY")
 
 class TTSRequest(BaseModel):
     text: str
@@ -30,7 +35,7 @@ class TTSResponse(BaseModel):
     message: str
     audiourl: Optional[str] = None
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
 def root():
     return """
     <!DOCTYPE html>
@@ -88,7 +93,7 @@ def generate_freetts(request_body: List[TTSRequest]):
         "sec-fetch-site": "same-origin",
         "sec-gpc": "1",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
-        "Cookie": "Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE5MGVlZTEyNEBhYml0LmVkdS5pbiIsInVzZXJuYW1lIjoiMTkwZWVlMTI0QGFiaXQuZWR1LmluIiwicGFzc3dvcmQiOiIxOTBlZWUxMjRAYWJpdC5lZHUuaW4iLCJpYXQiOjE3NTI2NzA0OTZ9.J5gft0J6aBEmiDTJHonqnxPq216OePdsZ3JjhXl-vSY"
+        "Cookie": f"Authorization={AUTH_KEY}"
     }
 
     try:
