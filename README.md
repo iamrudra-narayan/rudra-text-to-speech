@@ -95,22 +95,22 @@ git push -u origin main
 
 ```json
 [
-  {
-    "text": "Hello world, this is a test!",
-    "type": 1,
-    "ssml": 0,
-    "voiceType": "standard",
-    "languageCode": "en-US",
-    "voiceName": "en-US-Wavenet-D",
-    "gender": "MALE",
-    "speed": "1.0",
-    "pitch": "0",
-    "volume": "1.0",
-    "format": "mp3",
-    "quality": 1,
-    "isListenlingMode": 0,
-    "displayName": "Test Voice"
-  }
+    {
+        "text": "Transform this into a classic noir scene — high-contrast black and white, sharp shadows, foggy ambiance, and vintage film grain for my YouTube channel logo",
+        "type": 1,
+        "ssml": 0,
+        "voiceType": "Standard",
+        "languageCode": "en-US",
+        "voiceName": "Matthew",
+        "gender": "Male",
+        "speed": "1.0",
+        "pitch": "0",
+        "volume": "0",
+        "format": "mp3",
+        "quality": 0,
+        "isListenlingMode": 0,
+        "displayName": "Matthew Ibarra"
+    }
 ]
 ```
 
@@ -125,22 +125,24 @@ curl -X 'POST' \
   'https://rudra-text-to-speech.onrender.com/generate-freetts' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '[{
-    "text": "Hello world, this is a test!",
-    "type": 1,
-    "ssml": 0,
-    "voiceType": "standard",
-    "languageCode": "en-US",
-    "voiceName": "en-US-Wavenet-D",
-    "gender": "MALE",
-    "speed": "1.0",
-    "pitch": "0",
-    "volume": "1.0",
-    "format": "mp3",
-    "quality": 1,
-    "isListenlingMode": 0,
-    "displayName": "Test Voice"
-  }]'
+  -d '[
+    {
+        "text": "Transform this into a classic noir scene — high-contrast black and white, sharp shadows, foggy ambiance, and vintage film grain for my YouTube channel logo",
+        "type": 1,
+        "ssml": 0,
+        "voiceType": "Standard",
+        "languageCode": "en-US",
+        "voiceName": "Matthew",
+        "gender": "Male",
+        "speed": "1.0",
+        "pitch": "0",
+        "volume": "0",
+        "format": "mp3",
+        "quality": 0,
+        "isListenlingMode": 0,
+        "displayName": "Matthew Ibarra"
+    }
+]'
 ```
 
 ---
