@@ -1,5 +1,5 @@
 import json
-import re
+from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
@@ -30,6 +30,42 @@ class TTSResponse(BaseModel):
     message: str
     audiourl: Optional[str] = None
 
+@app.get("/", response_class=HTMLResponse)
+def root():
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Rudra Text-to-Speech API</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding-top: 50px;
+                background-color: #f4f4f4;
+            }
+            a {
+                display: inline-block;
+                margin-top: 20px;
+                font-size: 20px;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 6px;
+            }
+            a:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to Rudra Text-to-Speech API</h1>
+        <p>Click below to explore the API documentation.</p>
+        <a href="/docs" target="_blank">View API Docs</a>
+    </body>
+    </html>
+    """
 
 @app.post("/generate-freetts", response_model=TTSResponse)
 def generate_freetts(request_body: List[TTSRequest]):
